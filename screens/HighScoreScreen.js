@@ -2,8 +2,9 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import ContainerView from '../components/ContainerView';
+import * as Animatable from 'react-native-animatable';
 
-const SettingScreen = ({ navigation }) => {
+const HighScoreScreen = ({ navigation }) => {
     const [fontsLoaded] = useFonts({
         'Righteous-Regular': require('../assets/fonts/Righteous-Regular.ttf'),
     });
@@ -13,24 +14,21 @@ const SettingScreen = ({ navigation }) => {
     };
 
     return (
-        <ContainerView color='#f4effa'>
+        <ContainerView color='#ffc300'>
             <View style={styles.headerView}>
                 <Pressable onPress={() => navigation.pop()}>
-                    <Entypo name="back" size={40} color="#3c096c" />
+                    <Entypo name="back" size={40} color="#ffff" />
                 </Pressable>
-                    <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>SETTINGS</Text>
+                    <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>HIGH SCORES</Text>
             </View>
+            <Animatable.View style={styles.scoreList}>
+                <Text style={styles.text}>Test</Text>
+            </Animatable.View>
         </ContainerView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3c096c',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     headerView: {
         width: '80%',
         position: 'absolute',
@@ -39,9 +37,22 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     headerTitle: {
-        color: '#3c096c',
+        color: '#ffff',
         fontSize: 30
+    },
+    scoreList: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        width: '80%',
+        height: '60%',
+        borderRadius: 15,
+        // opacity: 0.7,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    text: {
+        fontSize: 50,
+        color: 'white'
     }
 });
 
-export default SettingScreen;
+export default HighScoreScreen;

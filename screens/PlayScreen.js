@@ -1,25 +1,25 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import Game from '../components/Game';
+import { useSelector } from 'react-redux';
+import ContainerView from '../components/ContainerView';
 
 const PlayScreen = ({ navigation }) => {
+    const gameOver = useSelector(state => state.game.gameOver);
     return (
-        <View style={styles.container}>
+        <ContainerView>
             <View style={styles.profileView}>
-                <Pressable style={styles.profile}>
+                <Pressable onPress={() => navigation.pop()} style={styles.profile}>
                     <FontAwesome5 name="pause" size={24} color="#ffff" />
                 </Pressable>
             </View>
-        </View>
+            <Text>gameover: {gameOver.toString()}</Text>
+            <Game rows={20} columns={10} />
+        </ContainerView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3c096c',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     profileView: {
         width: '80%',
         alignItems: 'flex-end',
@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
         top: '8%'
     },
     profile: {
-        backgroundColor: '#ff9100',
+        // backgroundColor: '#ff9100',
         width: 50,
         height: 50,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 3,
-        borderColor: '#ffff'
+        // borderWidth: 3,
+        // borderColor: '#ffff'
     },
 });
 

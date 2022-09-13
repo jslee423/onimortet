@@ -11,8 +11,14 @@ import {
     MaterialCommunityIcons,
     FontAwesome5
 } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
+import { useSelector, useDispatch } from 'react-redux';
+import { setGameOver } from '../redux/gameSlice';
+import ContainerView from '../components/ContainerView';
 
 const HomeScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
+
     const [fontsLoaded] = useFonts({
         'Righteous-Regular': require('../assets/fonts/Righteous-Regular.ttf'),
     });
@@ -21,28 +27,32 @@ const HomeScreen = ({ navigation }) => {
         return null;
     };
 
+    const play = () => {
+        dispatch(setGameOver(false));
+        navigation.navigate('Play');
+    };
+
     return (
-        <View style={styles.container}>
-            <View style={styles.profileView}>
+        <ContainerView>
+            <Animatable.View style={styles.profileView} animation='bounceInDown' delay={1500} duration={2200}>
                 <Pressable style={styles.profile}>
                     <FontAwesome5 name="user-alt" size={24} color="#ffff" />
                 </Pressable>
-            </View>
-            <View style={styles.title}>
-                <Image source={require('../assets/images/pngegg.png')} style={styles.logo} />
+            </Animatable.View>
+            <Animatable.View style={styles.title} animation='bounceInDown' delay={1000} duration={2200}>
+                <Image source={require('../assets/images/logo.png')} style={styles.logo} />
                 <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.titleText]}>ONIMORTET</Text>
 
-            </View>
-            <Pressable
-                style={styles.playBtn}
-                onPress={() => navigation.navigate('Play')}
-            >
-                <Ionicons name="ios-play" size={24} color="black" />
-            </Pressable>
-            <View style={styles.secondRowBtnView}>
+            </Animatable.View>
+            <Animatable.View style={styles.playBtn} animation='bounceInDown' delay={500} duration={2000}>
+                <Pressable onPress={() => play()} style={styles.playBtnPress}>
+                    <Ionicons name="ios-play" size={24} color="black" />
+                </Pressable>
+            </Animatable.View>
+            <Animatable.View style={styles.secondRowBtnView} animation='bounceInDown' duration={2000}>
                 <Pressable
                     style={styles.highScoreBtn}
-                    onPress={() => navigation.navigate('Play')}
+                    onPress={() => navigation.navigate('HighScore')}
                 >
                     <MaterialCommunityIcons name="crown" size={24} color="black" />
                 </Pressable>
@@ -52,18 +62,12 @@ const HomeScreen = ({ navigation }) => {
                 >
                     <Ionicons name="settings-sharp" size={24} color="black" />
                 </Pressable>
-            </View>
-        </View>
+            </Animatable.View>
+        </ContainerView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3c096c',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     profileView: {
         width: '80%',
         alignItems: 'flex-end',
@@ -102,6 +106,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '3%'
+    },
+    playBtnPress: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     secondRowBtnView: {
         flexDirection: 'row',
