@@ -1,20 +1,14 @@
 import {
     StyleSheet,
     View,
-    Button,
     Text,
-    TouchableOpacity,
-    Alert,
-    Modal
 } from "react-native";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { pause, resume, restart, showModal } from "../actions";
 
 const ScoreBoard = (props) => {
     const dispatch = useDispatch();
     const game = useSelector((state) => state.game);
-    const { score, isRunning, gameOver } = game;
+    const { score } = game;
 
     return (
         <View style={styles.scoreBoard}>
@@ -49,19 +43,3 @@ const styles = StyleSheet.create({
 });
 
 export default ScoreBoard;
-
-    /* Button Colors */
-//     --button-color-t: rgba(200, 200, 200, 1);
-//     --button-color-r: rgba(150, 150, 150, 1);
-//     --button-color-b: rgba(120, 120, 120, 1);
-//     --button-color-l: rgba(222, 222, 222, 1);
-/* Score Board */
-// .score-board-button {
-//     display: block;
-//     padding: 1em;
-//     border-width: 5px;
-//     border-top-color: var(--button-color-t);
-//     border-left-color: var(--button-color-l);
-//     border-right-color: var(--button-color-r);
-//     border-bottom-color: var(--button-color-b);
-//   }

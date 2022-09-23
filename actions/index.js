@@ -7,6 +7,7 @@ export const MOVE_DOWN  = "MOVE_DOWN";   // Move piece down
 export const GAME_OVER  = "GAME_OVER";   // The game is over
 export const RESTART    = "RESTART";     // Restart Game
 export const SHOW_MODAL    = "SHOW_MODAL";     // Restart Game
+export const SET_DIFFICULTY = "SET_DIFFICULTY"; // Set game difficulty
 
 
 export const moveRight = () => {
@@ -39,4 +40,8 @@ export const restart = () => {
 
 export const showModal = () => {
     return { type: SHOW_MODAL };
+};
+
+export const setDifficulty = () => {
+    return { type: SET_DIFFICULTY };
 };

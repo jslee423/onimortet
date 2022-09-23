@@ -1,7 +1,6 @@
 import {
     StyleSheet,
     Text,
-    View,
     Pressable,
     Image
 } from 'react-native';
@@ -12,16 +11,12 @@ import {
     FontAwesome5
 } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
-import { useSelector, useDispatch } from 'react-redux';
-// import { setGameOver } from '../redux/gameSlice';
+import { useDispatch } from 'react-redux';
 import ContainerView from '../components/ContainerView';
 import { restart } from '../actions';
 
 const HomeScreen = ({ navigation }) => {
     const dispatch = useDispatch();
-    const isRunning = useSelector((state) => state.game.isRunning);
-    const gameOver = useSelector((state) => state.game.gameOver);
-    const showPauseScreen = useSelector((state) => state.game.showPauseScreen);
 
     const [fontsLoaded] = useFonts({
         'Righteous-Regular': require('../assets/fonts/Righteous-Regular.ttf'),
