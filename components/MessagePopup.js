@@ -1,29 +1,15 @@
-import { StyleSheet, View, Text, Alert, Modal, TouchableOpacity, Pressable } from "react-native"
-import { useState } from "react";
+import { StyleSheet, View, Text, Modal, Pressable } from "react-native"
 import { useSelector, useDispatch } from "react-redux";
-import { resume, showModal, restart } from "../actions";
+import { showModal, restart } from "../actions";
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Displays a message
-const MessagePopup = (props) => {
+const MessagePopup = ({ navigation }) => {
     // const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useDispatch();
     const isRunning = useSelector((state) => state.game.isRunning);
     const gameOver = useSelector((state) => state.game.gameOver);
     const showPauseScreen = useSelector((state) => state.game.showPauseScreen);
-
-    let message = '';
-    let buttonText = '';
-    let pauseStatus = '';
-
-    if (gameOver) {
-        message = 'GAME OVER';
-        buttonText = 'RESTART';
-        pauseStatus = 'gameover';
-    } else if (!isRunning) {
-        message = 'PAUSED';
-        buttonText = 'RESUME';
-        pauseStatus = 'pause';
-    }
 
     return (
         <View style={styles.messagePopup}>
@@ -31,38 +17,30 @@ const MessagePopup = (props) => {
                 animationType="slide"
                 transparent={true}
                 visible={gameOver ? true : showPauseScreen}
-                // onRequestClose={() => {
-                //     Alert.alert("Modal has been closed.");
-                //     setModalVisible(!modalVisible);
-                // }}
+                animationInTiming={800}
+                animationOutTiming={800}
+                backdropTransitionInTiming={800}
+                backdropTransitionOutTiming={800}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalPause}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalHeader}>{message}</Text>
-                            {!gameOver &&
-                                <TouchableOpacity style={[styles.button, styles.buttonResume]} onPress={(e) => {
-                                    if (gameOver) { return }
-                                    dispatch(resume());
-                                    dispatch(showModal());
-                                }}>
-                                    <Text style={styles.textStyle}>{buttonText}</Text>
-                                </TouchableOpacity>
-                            }
-                          
-                                <TouchableOpacity style={[styles.button, styles.buttonRestart]} onPress={(e) => {
-                                    if (gameOver) {
+                            <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.modalHeader]}>GAME OVER</Text>
+                            <View style={styles.homeBtn}>
+                                <Pressable onPress={() => navigation.navigate('Home')} style={styles.btnPress}>
+                                    <Ionicons name="home" size={24} color="#ffff" />
+                                </Pressable>
+                            </View>
+                            <View style={styles.restartBtn}>
+                                <Pressable onPress={(e) => {
                                         dispatch(showModal());
                                         dispatch(restart());
-                                    } else {
-                                        dispatch(showModal());
-                                        dispatch(restart());
-                                    }
-                                    
-                                }}>
-                                    <Text style={styles.textStyle}>RESTART</Text>
-                                </TouchableOpacity>
-                            
+                                    }}
+                                    style={styles.btnPress}
+                                >
+                                    <MaterialCommunityIcons name="restart" size={24} color="#ffff" />
+                                </Pressable>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -72,10 +50,6 @@ const MessagePopup = (props) => {
 };
 
 const styles = StyleSheet.create({
-    centeredView: {
-        backgroundColor: '#eaeaea',
-        // opacity: 0.8
-    },
     modalPause: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -99,11 +73,44 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     modalHeader: {
-        marginBottom: 50,
+        marginBottom: 10,
         textAlign: "center",
         fontWeight: 'bold',
-        fontSize: 35
-    }
+        fontSize: 35,
+        color: '#3c096c'
+    },
+    modalView: {
+        width: '70%',
+        height: '20%',
+        backgroundColor: '#f4effa',
+        borderRadius: 7,
+        // opacity: 0.95,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    homeBtn: {
+        backgroundColor: 'rgba(223, 173, 36, 1)',
+        width: '60%',
+        height: '25%',
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '3%',
+    },
+    restartBtn: {
+        backgroundColor: 'rgba(240, 80, 195, 1)',
+        width: '60%',
+        height: '25%',
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    btnPress: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 });
 
 export default MessagePopup;
