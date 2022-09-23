@@ -172,27 +172,27 @@ export const nextRotation = (shape, rotation) => {
 export const canMoveTo = (shape, grid, x, y, rotation) => {
     const currentShape = shapes[shape][rotation];
     // Get the width and height of the grid
-    const gridWidth = grid[0].length - 1
-    const gridHeight = grid.length - 1
+    const gridWidth = grid[0].length - 1;
+    const gridHeight = grid.length - 1;
     // Loop over the shape array
     for (let row = 0; row < currentShape.length; row++) {
         for (let col = 0; col < currentShape[row].length; col++) {
             // If the value isn't 0 it's part of the shape
             if (currentShape[row][col] !== 0) {
                 // Offset the square to map it to the larger grid
-                const proposedX = col + x
-                const proposedY = row + y
+                const proposedX = col + x;
+                const proposedY = row + y;
                 // Get the possible row. This might be undefined if we're above the top
-                const possibleRow = grid[proposedY]
+                const possibleRow = grid[proposedY];
 
                 // Off the left or right side or off the bottom return false
                 if (proposedX < 0 || proposedX > gridWidth || proposedY > gridHeight) {
-                    return false
+                    return false;
                 } else if (possibleRow !== undefined) {
                     // If the row is not undefined you're on the grid
                     if (possibleRow[proposedX] !== 0) {
                         // This square must be filled
-                        return false
+                        return false;
                     }
                 }
             }
