@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import ContainerView from '../components/ContainerView';
@@ -7,9 +7,12 @@ import Controls from '../components/Controls';
 import NextBlock from '../components/NextBlock';
 import ScoreBoard from '../components/ScoreBoard';
 import { pause } from '../actions';
+import MessagePopup from '../components/MessagePopup';
 
 const PlayScreen = ({ navigation }) => {
     const gameOver = useSelector(state => state.game.gameOver);
+    const speed = useSelector(state => state.game.speed);
+    const difficulty = useSelector(state => state.game.difficulty);
     const dispatch = useDispatch();
 
     const handlePause = () => {
@@ -30,6 +33,7 @@ const PlayScreen = ({ navigation }) => {
                 <NextBlock />
             </View>
             <Controls />
+            <MessagePopup navigation={navigation} />
         </ContainerView>
     );
 };
