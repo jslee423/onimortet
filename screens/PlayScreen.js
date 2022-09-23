@@ -1,40 +1,58 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import Game from '../components/Game';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ContainerView from '../components/ContainerView';
+import GridBoard from '../components/GridBoard';
+import Controls from '../components/Controls';
+import NextBlock from '../components/NextBlock';
+import ScoreBoard from '../components/ScoreBoard';
+import { pause } from '../actions';
 
 const PlayScreen = ({ navigation }) => {
     const gameOver = useSelector(state => state.game.gameOver);
+    const dispatch = useDispatch();
+
+    const handlePause = () => {
+        dispatch(pause());
+        navigation.navigate('Pause');
+    };
+
     return (
         <ContainerView>
-            <View style={styles.profileView}>
-                <Pressable onPress={() => navigation.pop()} style={styles.profile}>
+            <View style={styles.pauseView}>
+                <Pressable onPress={() => handlePause()} style={styles.pause}>
                     <FontAwesome5 name="pause" size={24} color="#ffff" />
                 </Pressable>
             </View>
-            <Text>gameover: {gameOver.toString()}</Text>
-            <Game rows={20} columns={10} />
+            <ScoreBoard />
+            <View style={styles.playView}>
+                <GridBoard />
+                <NextBlock />
+            </View>
+            <Controls />
         </ContainerView>
     );
 };
 
 const styles = StyleSheet.create({
-    profileView: {
+    pauseView: {
         width: '80%',
         alignItems: 'flex-end',
         position: 'absolute',
         top: '8%'
     },
-    profile: {
-        // backgroundColor: '#ff9100',
+    pause: {
         width: 50,
         height: 50,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        // borderWidth: 3,
-        // borderColor: '#ffff'
+    },
+    playView: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '80%',
+        justifyContent: 'space-between'
     },
 });
 

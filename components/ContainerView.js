@@ -1,7 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
 const ContainerView = (props) => {
-    console.log(props.color);
     return (
         <View style={
                 props.color ? [{ backgroundColor: props.color }, styles.container] 

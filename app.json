@@ -2,14 +2,16 @@
   "expo": {
     "name": "onimortet",
     "slug": "onimortet",
+    "privacy": "public",
+    "description": "simple tetromino clone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/adaptive-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#3c096c"
+      "backgroundColor": "#200040"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,13 +23,19 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.onimortet",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4c359973-0e4a-48d5-b57a-7aa13e6a7a18"
+      }
     }
   }
 }

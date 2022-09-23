@@ -20,6 +20,7 @@ const SettingScreen = ({ navigation }) => {
                 </Pressable>
                     <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>SETTINGS</Text>
             </View>
+            <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>COMING SOON!</Text>
         </ContainerView>
     );
 };

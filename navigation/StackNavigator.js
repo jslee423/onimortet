@@ -3,6 +3,7 @@ import HomeScreen from '../screens/HomeScreen';
 import PlayScreen from '../screens/PlayScreen';
 import SettingScreen from '../screens/SettingScreen';
 import HighScoreScreen from '../screens/HighScoreScreen';
+import PauseScreen from '../screens/PauseScreen';
 
 const StackNavigator = () => {
     const Stack = createNativeStackNavigator();
@@ -28,6 +29,11 @@ const StackNavigator = () => {
                 name="HighScore"
                 component={HighScoreScreen}
                 options={{ title: 'HighScore', headerShown: false }}
+            />
+            <Stack.Screen
+                name="Pause"
+                component={PauseScreen}
+                options={{ title: 'Pause', headerShown: false }}
             />
         </Stack.Navigator>
     );

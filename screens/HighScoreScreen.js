@@ -21,9 +21,10 @@ const HighScoreScreen = ({ navigation }) => {
                 </Pressable>
                     <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>HIGH SCORES</Text>
             </View>
-            <Animatable.View style={styles.scoreList}>
+            {/* <Animatable.View style={styles.scoreList}>
                 <Text style={styles.text}>Test</Text>
-            </Animatable.View>
+            </Animatable.View> */}
+            <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>COMING SOON!</Text>
         </ContainerView>
     );
 };
