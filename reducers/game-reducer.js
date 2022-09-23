@@ -7,7 +7,8 @@ import {
     RESUME,
     RESTART,
     GAME_OVER,
-    SHOW_MODAL
+    SHOW_MODAL,
+    SET_DIFFICULTY
 } from '../actions';
 import {
     defaultState,
@@ -19,7 +20,8 @@ import {
 } from '../utils';
 
 const gameReducer = (state = defaultState(), action) => {
-    const { shape, grid, x, y, rotation, nextShape, score, isRunning, showPauseScreen } = state;
+    const { shape, grid, x, y, rotation, nextShape, score, isRunning, showPauseScreen, difficulty, speed } = state;
+    let diff = 'EASY';
 
     switch(action.type) {
         case ROTATE:
@@ -88,11 +90,35 @@ const gameReducer = (state = defaultState(), action) => {
         case GAME_OVER:
             return state;
         case RESTART:
-            return defaultState();
+            const restartState = defaultState();
+            let spd = 1000;
+            if (difficulty === 'EASY') {
+                spd = 1000;
+            } else if (difficulty === 'MEDIUM') {
+                spd = 800;
+            } else if (difficulty === 'HARD') {
+                spd = 600;
+            }
+            restartState.speed = spd;
+            restartState.difficulty = difficulty;
+            return restartState;
+            // return defaultState();
         case SHOW_MODAL:
             return {
                 ...state,
                 showPauseScreen: !showPauseScreen
+            };
+        case SET_DIFFICULTY:
+            if (difficulty === 'EASY') {
+                diff = 'MEDIUM';
+            } else if (difficulty === 'MEDIUM') {
+                diff = 'HARD';
+            } else if (difficulty === 'HARD') {
+                diff = 'EASY';
+            }
+            return {
+                ...state,
+                difficulty: diff
             };
         default:
             return state;
