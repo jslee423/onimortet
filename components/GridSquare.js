@@ -41,41 +41,49 @@ const styles = StyleSheet.create({
         width: 22,
         height: 22,
         borderColor: 'rgba(0, 0, 0, 0.15)',
-        borderRadius: 7
+        borderRadius: 7,
+        margin: 1
     },
     color0: {
         backgroundColor: 'rgb(32, 0, 64)'
     },
+    // I
     color1: {
         backgroundColor: '#ff6600'
     },
+    // T
     color2: {
         backgroundColor: '#eec900'
     },
+    // L
     color3: {
         backgroundColor: '#0000ff'
     },
+    // J
     color4: {
         backgroundColor: '#cc00ff'
     },
+    // Z
     color5: {
-        backgroundColor: '#00ff00'
+        backgroundColor: '#50C878'
     },
+    // S
     color6: {
         backgroundColor: '#66ccff'
     },
+    // []
     color7: {
         backgroundColor: '#ff0000'
     },
     sparkle: {
         position: 'absolute',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
         width: 5,
         height: 5,
-        right: 3,
-        top: 3,
+        right: 2,
+        top: 2,
         borderRadius: 5,
-        opacity: 0.5
+        // opacity: 0.5
     }
 });
 

@@ -6,8 +6,9 @@ import { shapes } from '../utils'
 
 // Draws the "next" block view showing the next block to drop
 const NextBlock = (props) => {
-    const nextShape = useSelector((state) => state.game.nextShape)
-    const box = shapes[nextShape][0] // Get the first rotation
+    const nextShape = useSelector((state) => state.game.nextShape);
+    const difficulty = useSelector((state) => state.game.difficulty);
+    const box = shapes[nextShape][0]; // Get the first rotation
     // Map the block to the grid
     const grid = box.map((rowArray, row) => {
         return rowArray.map((square, col) => {
@@ -16,7 +17,11 @@ const NextBlock = (props) => {
     })
 
     return (
-        <View style={styles.nextBlock}>
+        <View style={[difficulty === 'MEDIUM' ? styles.medDiff
+            : difficulty === 'HARD' ? styles.hardDiff
+            : '',
+            styles.nextBlock]}
+        >
             {grid}
         </View>
     );
@@ -27,10 +32,18 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        width: 72,
-        height: 72,
+        width: 82,
+        height: 82,
         backgroundColor: 'rgb(32, 0, 64)',
         borderRadius: 5
+    },
+    medDiff: {
+        borderColor: 'yellow',
+        borderWidth: 1,
+    },
+    hardDiff: {
+        borderColor: 'red',
+        borderWidth: 1,
     }
 });
 

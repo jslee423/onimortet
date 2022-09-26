@@ -12,7 +12,7 @@ const GridBoard = (props) => {
     const progressTimeRef = useRef(0);
     const dispatch = useDispatch();
     const game = useSelector((state) => state.game);
-    const { grid, shape, rotation, x, y, isRunning, speed } = game;
+    const { grid, shape, rotation, x, y, isRunning, speed, difficulty } = game;
     const block = shapes[shape][rotation];
     const blockColor = shape;
 
@@ -61,7 +61,11 @@ const GridBoard = (props) => {
   
     // The components generated in makeGrid are rendered in div.grid-board
     return (
-        <View style={styles.gridBoard}>
+        <View style={[difficulty === 'MEDIUM' ? styles.medDiff
+            : difficulty === 'HARD' ? styles.hardDiff
+            : '',
+            styles.gridBoard]}
+        >
             {gridSquares}
         </View>
     );
@@ -72,12 +76,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        width: 220,
-        height: 396,
+        width: 242,
+        height: 434,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgb(32, 0, 64)',
-        borderRadius: 7
+        borderRadius: 7,
+    },
+    medDiff: {
+        borderColor: 'yellow',
+        borderWidth: 1,
+    },
+    hardDiff: {
+        borderColor: 'red',
+        borderWidth: 1,
     }
 });
 
