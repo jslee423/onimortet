@@ -9,16 +9,16 @@ const StackNavigator = () => {
     const Stack = createNativeStackNavigator();
 
     return (
-        <Stack.Navigator screenOptions={{ gestureEnabled: false }}>
+        <Stack.Navigator>
             <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ title: 'Home', headerShown: false }}
+                options={{ title: 'Home', headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
                 name="Play"
                 component={PlayScreen}
-                options={{ title: 'Play', headerShown: false }}
+                options={{ title: 'Play', headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
                 name="Setting"
@@ -33,7 +33,7 @@ const StackNavigator = () => {
             <Stack.Screen
                 name="Pause"
                 component={PauseScreen}
-                options={{ title: 'Pause', headerShown: false }}
+                options={{ title: 'Pause', headerShown: false, gestureEnabled: false }}
             />
         </Stack.Navigator>
     );

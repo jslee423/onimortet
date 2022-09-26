@@ -5,9 +5,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Displays a message
 const MessagePopup = ({ navigation }) => {
-    // const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useDispatch();
-    const isRunning = useSelector((state) => state.game.isRunning);
     const gameOver = useSelector((state) => state.game.gameOver);
     const showPauseScreen = useSelector((state) => state.game.showPauseScreen);
 
