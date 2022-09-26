@@ -1,58 +1,131 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 import { moveDown, moveLeft, moveRight, rotate } from '../actions'
+import { useRef, useState } from "react";
 
 const Controls = () => {
     const dispatch = useDispatch();
-    const isRunning = useSelector((state) => state.isRunning);
-    const gameOver = useSelector((state) => state.game.gameOver);
+    // const isRunning = useSelector((state) => state.isRunning);
+    // const gameOver = useSelector((state) => state.game.gameOver);
+    const speed = useSelector((state) => state.game.speed);
+
+    const timer = useRef(null);
+    const timerRotate = useRef(null);
+    const timerRight = useRef(null);
+    const timerDown = useRef(null);
+    const [action, setAction] = useState('');
+
+    const leftPressed = () => {
+        dispatch(moveLeft());
+        timer.current = setTimeout(leftPressed, 110);
+    };
+
+    const rightPressed = () => {
+        dispatch(moveRight());
+        timerRight.current = setTimeout(rightPressed, 110);
+    };
+
+    const downPressed = () => {
+        dispatch(moveDown());
+        timerDown.current = setTimeout(downPressed, 110);
+    };
+
+    const rotatePressed = () => {
+        dispatch(rotate());
+        timerRotate.current = setTimeout(rotatePressed, 1000);
+    };
+
+    const stopTimer = () => {
+        clearTimeout(timer.current);
+    };
+    const stopTimerRight = () => {
+        clearTimeout(timerRight.current);
+    };
+    const stopTimerDown = () => {
+        clearTimeout(timerDown.current);
+    };
+    const stopTimerRotate = () => {
+        clearTimeout(timerRotate.current);
+    };
+
 
     return (
         <View style={styles.controls}>
-            <View style={styles.controlsRotate}>
-                {/* rotate */}
-                <TouchableOpacity style={[styles.buttonRotate]} onPress={(e) => {
-                    // if (!isRunning || gameOver) { return }
-                    dispatch(rotate())
-                }}>
-                    <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
-                        ROTATE
-                    </Text>
-                </TouchableOpacity>
-            </View>
             <View style={styles.controlsLeftRightDown}>
                 <View style={styles.controlsLeftRight}>
                     {/* left */}
-                    <TouchableOpacity style={[styles.button, styles.buttonLeftRight]} onPress={(e) => {
-                        // if (!isRunning || gameOver) { return }
-                        dispatch(moveLeft())
-                    }}>
+                    <View
+                        onTouchStart={leftPressed}
+                        onTouchEnd={stopTimer}
+                        style={[styles.button, styles.buttonLeftRight]}
+                    >
+                        <TouchableOpacity
+                            // onPress={(e) => {
+                            //     dispatch(moveLeft())
+                            // }}
+                            // onPressIn={leftPressed}
+                            // onPressOut={stopTimer}
+                        >
+                            <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
+                                LEFT
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* right */}
+                    <View
+                        onTouchStart={rightPressed}
+                        onTouchEnd={stopTimerRight}
+                        style={[styles.button, styles.buttonLeftRight]}
+                    >
+                        <TouchableOpacity
+                            // onPress={(e) => {
+                            //     dispatch(moveRight())
+                            // }}
+                            // onPressIn={rightPressed}
+                            // onPressOut={stopTimer}
+                        >
+                            <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
+                                RIGHT
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                {/* down */}
+                <View
+                    onTouchStart={downPressed}
+                    onTouchEnd={stopTimerDown}
+                    style={[styles.button, styles.buttonDown]}
+                >
+                    <TouchableOpacity
+                        // onPress={(e) => {
+                        //     dispatch(moveDown())
+                        // }}
+                        // onPressIn={downPressed}
+                        // onPressOut={stopTimer}
+                    >
                         <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
-                            LEFT
+                            DOWN
                         </Text>
                     </TouchableOpacity>
-                    {/* right */}
-                    <TouchableOpacity style={[styles.button, styles.buttonLeftRight]} onPress={(e) => {
-                        // if (!isRunning || gameOver) { return }
-                        dispatch(moveRight())
-                    }}>
-                        <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
-                            RIGHT
-                        </Text>
-                    </TouchableOpacity> 
                 </View>
-                {/* down */}
-                <TouchableOpacity
-                    style={[styles.button, styles.buttonDown]}
-                    onPress={(e) => {
-                        // if (!isRunning || gameOver) { return }
-                        dispatch(moveDown())
-                    }}
-                >
-                    <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
-                        DOWN
-                    </Text>
-                </TouchableOpacity>
+
+            </View>
+            <View style={styles.controlsRotate}>
+                {/* rotate */}
+                <View onTouchStart={rotatePressed} onTouchEnd={stopTimerRotate}>
+                    <TouchableOpacity
+                        style={[styles.buttonRotate]}
+                        // onPress={(e) => {
+                        //     dispatch(rotate())
+                        // }}
+                    >
+                        <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
+                            ROTATE
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -67,6 +140,7 @@ const styles = StyleSheet.create({
     },
     controlsRotate: {
         width: '50%',
+        alignItems: 'flex-end'
     },
     controlsLeftRightDown: {
         width: '50%',
