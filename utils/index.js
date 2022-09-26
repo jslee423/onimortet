@@ -159,6 +159,8 @@ export const defaultState = () => {
         gameOver: false,
         showPauseScreen: false,
         rowsCompleted: 0,
+        lines: 10,
+        level: 1,
         difficulty: 'EASY'
     };
 };
@@ -240,5 +242,9 @@ export const checkRows = (grid) => {
             grid.unshift(Array(10).fill(0));
         }
     }
-  return points[completedRows]
+//   return points[completedRows]
+    return {
+        points: points[completedRows],
+        clearedRows: completedRows
+    };
 };

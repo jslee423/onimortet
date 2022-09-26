@@ -20,7 +20,22 @@ import {
 } from '../utils';
 
 const gameReducer = (state = defaultState(), action) => {
-    const { shape, grid, x, y, rotation, nextShape, score, isRunning, showPauseScreen, difficulty, speed } = state;
+    const {
+        shape,
+        grid,
+        x,
+        y,
+        rotation,
+        nextShape,
+        score,
+        isRunning,
+        showPauseScreen,
+        difficulty,
+        rowsCompleted,
+        level,
+        speed,
+        lines
+    } = state;
     let diff = 'EASY';
 
     switch(action.type) {
@@ -71,10 +86,26 @@ const gameReducer = (state = defaultState(), action) => {
             newState.shape = nextShape;
             newState.score = score;
             newState.isRunning = isRunning;
+            newState.rowsCompleted = rowsCompleted;
+            newState.level = level;
+            newState.speed = speed;
+            newState.difficulty = difficulty;
 
             // TODO: Check and Set level
+            const { points, clearedRows } = checkRows(newGrid);
+            const linesPerLevel = 10;
+            newState.rowsCompleted = rowsCompleted + clearedRows;
+            
+            if (newState.rowsCompleted >= linesPerLevel) {
+                newState.level = level + 1;
+                newState.speed = speed - 100;
+                newState.rowsCompleted = newState.rowsCompleted - linesPerLevel;
+            }
+            newState.lines = linesPerLevel - newState.rowsCompleted;
+
             // Score increases decrease interval
-            newState.score = score + checkRows(newGrid);
+            // newState.score = score + checkRows(newGrid);
+            newState.score = score + points;
 
             return newState;
         case RESUME:

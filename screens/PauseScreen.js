@@ -7,6 +7,7 @@ import { resume, restart, pause } from "../actions";
 const PauseScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const score = useSelector((state) => state.game.score);
+    const level = useSelector((state) => state.game.level);
 
     const handleResume = () => {
         dispatch(resume());
@@ -29,7 +30,7 @@ const PauseScreen = ({ navigation }) => {
                 <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.headerTitle]}>PAUSED</Text>
             </View>
             <View style={styles.scoreLevel}>
-                <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.scoreLevelText]}>LEVEL: 1</Text>
+                <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.scoreLevelText]}>LEVEL: {level}</Text>
                 <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.scoreLevelText]}>SCORE: {score}</Text>
             </View>
             <View style={styles.profileView}>

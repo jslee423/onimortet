@@ -3,19 +3,17 @@ import {
     View,
     Text,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ScoreBoard = (props) => {
-    const dispatch = useDispatch();
     const game = useSelector((state) => state.game);
     const { score } = game;
 
     return (
         <View style={styles.scoreBoard}>
             <View style={styles.scoreLevel}>
-                <Text style={[{ fontFamily: 'Righteous-Regular', marginRight: 50 }, styles.label]}>Level: 1</Text>
-                <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.label]}>Score: { score }</Text>
-                
+                <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.label]}>SCORE</Text>
+                <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.label]}>{ score }</Text>  
             </View>
         </View>
     );
@@ -27,14 +25,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     scoreLevel: {
-        marginBottom: '5%',
+        marginBottom: '2%',
         display: 'flex',
-        flexDirection: 'row',
+        // flexDirection: 'row',
         // width: '60%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     label: {
-        color: 'white',
+        color: '#ffff',
         fontSize: 25
     },
     buttonDown: {

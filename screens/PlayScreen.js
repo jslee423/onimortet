@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import ContainerView from '../components/ContainerView';
@@ -11,8 +11,8 @@ import MessagePopup from '../components/MessagePopup';
 
 const PlayScreen = ({ navigation }) => {
     const gameOver = useSelector(state => state.game.gameOver);
-    const speed = useSelector(state => state.game.speed);
-    const difficulty = useSelector(state => state.game.difficulty);
+    const level = useSelector(state => state.game.level);
+    const lines = useSelector(state => state.game.lines);
     const dispatch = useDispatch();
 
     const handlePause = () => {
@@ -30,7 +30,15 @@ const PlayScreen = ({ navigation }) => {
             <ScoreBoard />
             <View style={styles.playView}>
                 <GridBoard />
-                <NextBlock />
+                <View>
+                    <NextBlock />
+                    <View style={styles.levelLineView}>
+                        <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.levels]}>LEVEL</Text>
+                        <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.levelCurrent]}>{level}</Text>
+                        <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.lines]}>GOAL</Text>
+                        <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.linesCurrent]}>{lines}</Text>
+                    </View>
+                </View>
             </View>
             <Controls />
             <MessagePopup navigation={navigation} />
@@ -55,9 +63,30 @@ const styles = StyleSheet.create({
     playView: {
         display: 'flex',
         flexDirection: 'row',
-        width: '80%',
+        width: '90%',
         justifyContent: 'space-between'
     },
+    levelLineView: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    levels: {
+        color: '#ffff',
+        fontSize: 20,
+        marginTop: 15
+    },
+    levelCurrent: {
+        color: '#ffff',
+        fontSize: 40
+    },
+    lines: {
+        color: '#ffff',
+        fontSize: 20,
+    },
+    linesCurrent: {
+        color: '#ffff',
+        fontSize: 40
+    }
 });
 
 export default PlayScreen;
