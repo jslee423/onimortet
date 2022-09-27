@@ -5,8 +5,6 @@ import { useRef, useState } from "react";
 
 const Controls = () => {
     const dispatch = useDispatch();
-    // const isRunning = useSelector((state) => state.isRunning);
-    // const gameOver = useSelector((state) => state.game.gameOver);
     const speed = useSelector((state) => state.game.speed);
 
     const timer = useRef(null);
@@ -59,13 +57,7 @@ const Controls = () => {
                         onTouchEnd={stopTimer}
                         style={[styles.button, styles.buttonLeftRight]}
                     >
-                        <TouchableOpacity
-                            // onPress={(e) => {
-                            //     dispatch(moveLeft())
-                            // }}
-                            // onPressIn={leftPressed}
-                            // onPressOut={stopTimer}
-                        >
+                        <TouchableOpacity>
                             <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
                                 LEFT
                             </Text>
@@ -78,13 +70,7 @@ const Controls = () => {
                         onTouchEnd={stopTimerRight}
                         style={[styles.button, styles.buttonLeftRight]}
                     >
-                        <TouchableOpacity
-                            // onPress={(e) => {
-                            //     dispatch(moveRight())
-                            // }}
-                            // onPressIn={rightPressed}
-                            // onPressOut={stopTimer}
-                        >
+                        <TouchableOpacity>
                             <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
                                 RIGHT
                             </Text>
@@ -98,13 +84,7 @@ const Controls = () => {
                     onTouchEnd={stopTimerDown}
                     style={[styles.button, styles.buttonDown]}
                 >
-                    <TouchableOpacity
-                        // onPress={(e) => {
-                        //     dispatch(moveDown())
-                        // }}
-                        // onPressIn={downPressed}
-                        // onPressOut={stopTimer}
-                    >
+                    <TouchableOpacity>
                         <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
                             DOWN
                         </Text>
@@ -112,15 +92,11 @@ const Controls = () => {
                 </View>
 
             </View>
+            
             <View style={styles.controlsRotate}>
                 {/* rotate */}
                 <View onTouchStart={rotatePressed} onTouchEnd={stopTimerRotate}>
-                    <TouchableOpacity
-                        style={[styles.buttonRotate]}
-                        // onPress={(e) => {
-                        //     dispatch(rotate())
-                        // }}
-                    >
+                    <TouchableOpacity style={[styles.buttonRotate]}>
                         <Text style={[{ fontFamily: 'Righteous-Regular' }, styles.textStyle]}>
                             ROTATE
                         </Text>

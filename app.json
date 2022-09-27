@@ -24,6 +24,7 @@
     },
     "android": {
       "package": "com.onimortet",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
